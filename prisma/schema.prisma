@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model QrCode {
+  id       String  @id @default(cuid())
+  imageUrl String  @unique
+  userId   String?
+  bookId   String?
+  book     Book?
+}
+
+model Book {
+  id        String @id @default(cuid())
+  nameBook  String
+  author    String
+  isbn      String @unique
+  publisher String
+  format    String
+  qrCodeId  String @unique @default("")
+  qrCode    QrCode @relation(fields: [qrCodeId], references: [id])
+
+  Borrows Borrow[]
+}
+
+model Borrow {
+  id         String   @id @default(cuid())
+  bookId     String
+  book       Book     @relation(fields: [bookId], references: [id])
+  userId     String 
+  dateBorrow DateTime @default(now())
+  dateReturn DateTime @updatedAt
+  isReturn   Boolean  @default(false)
+
+  @@index([bookId])
+}
