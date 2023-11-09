@@ -70,7 +70,9 @@ export function DataTable<TData, TValue>({
                   </TableCell>
                 ))}
                 <TableCell>
-                  {String(row.getVisibleCells()[5].getValue()).includes('TRUE') ? (
+                  {String(row.getVisibleCells()[6].getValue()).includes(
+                    'TRUE'
+                  ) ? (
                     <Button disabled={true} variant="secondary">
                       Returned
                     </Button>

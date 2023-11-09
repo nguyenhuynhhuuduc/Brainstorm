@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    image: brainstorm
+    build:
+      context: ./
+      target: dev
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_URL=mysql://root:rootpassword@mysql:3306/brainstorm
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: brainstorm
+      MYSQL_USER: regular_user
+      MYSQL_PASSWORD: regular_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql

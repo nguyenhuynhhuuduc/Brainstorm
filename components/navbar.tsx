@@ -13,7 +13,6 @@ import { UserButton } from '@clerk/nextjs';
 const font = Poppins({ weight: '600', subsets: ['latin'] });
 
 export const Navbar = () => {
-
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ export const Navbar = () => {
       </div>
       <div className="flex items-center justify-center space-x-5">
         <ModeToggle />
-        <UserButton />
+        <UserButton afterSignOutUrl="/sign-in" />
       </div>
     </div>
   );

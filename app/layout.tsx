@@ -6,8 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { CrispProvider } from '@/components/crisp-provider';
 import { Toaster, toast } from 'sonner'
 import ModalProvider from '@/components/modal-provider';
-import cron from 'node-cron';
-import { sendEmailEveryday } from '@/lib/cron';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,9 +22,6 @@ export default function RootLayout({
 }) {
   const { userId } = auth();
 
-  cron.schedule("40 20 * * *", async () => {
-    await sendEmailEveryday();
-  })  
   return (
     <ClerkProvider>
       <html lang="en">
