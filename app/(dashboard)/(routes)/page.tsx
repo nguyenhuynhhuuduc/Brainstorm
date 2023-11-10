@@ -5,9 +5,6 @@ import { currentUser } from '@clerk/nextjs';
 
 const Page = async () => {
   const user = await currentUser();
-  cron.schedule("40 20 * * *", async () => {
-    await sendEmailEveryday();
-  })  
   return (
     <div className="mt-40 mx-10 grid sm:grid-cols-1 md:grid-cols-2 gap-5">
       <Avatar user={user!} />
