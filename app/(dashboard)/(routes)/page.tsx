@@ -1,8 +1,7 @@
 import Avatar from '@/components/avatar';
 import CardInfo from '@/components/card-info';
 import { currentUser } from '@clerk/nextjs';
-import cron from 'node-cron';
-import { sendEmailEveryday } from '@/lib/cron';
+
 
 const Page = async () => {
   const user = await currentUser();
